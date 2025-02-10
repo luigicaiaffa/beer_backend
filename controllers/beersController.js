@@ -26,7 +26,7 @@ const beersController = {
         .json({ status: "KO", message: "Invalid Parameter" });
 
     const sqlShow = `
-    SELECT beers.id, beers.name, beers.image, beers.alcohol_degrees, beers.size, beers.liked, breweries.brewery, breweries.nation, styles.style, styles.fermentation
+    SELECT beers.id, beers.name, beers.liked, beers.image, beers.alcohol_degrees, beers.size, beers.brewery_id, breweries.brewery, breweries.nation, beers.style_id, styles.style, styles.fermentation
       FROM beers
       INNER JOIN breweries
       ON beers.brewery_id = breweries.id
@@ -41,9 +41,10 @@ const beersController = {
       if (!results.length)
         return res
           .status(404)
-          .json({ status: "KO", message: "Doctor Not Found" });
+          .json({ status: "KO", message: "Beer Not Found" });
 
-      return res.json(results[0]);
+      const beer = results[0];
+      return res.json(beer);
     });
   },
 
