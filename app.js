@@ -11,11 +11,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // # Routers
-import { homeRouter } from "./routers/homeRouter.js";
 import { beersRouter } from "./routers/beersRouter.js";
 
-app.use("/beers", homeRouter);
-app.use("/beers/search", beersRouter);
+app.use("/api/beers", beersRouter);
 
 // # Listening
 app.listen(port, () => {

@@ -4,7 +4,7 @@ import { beersController } from "../controllers/beersController.js";
 const beersRouter = express.Router();
 
 beersRouter.get("/", beersController.index);
-// beersRouter.get("/:id", beersController.show);
+beersRouter.get("/:id", beersController.show);
 // beersRouter.post("/", beersController.store);
 // beersRouter.put("/:id", beersController.update);
 // beersRouter.patch("/:id", beersController.modify);
