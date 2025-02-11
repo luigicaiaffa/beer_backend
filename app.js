@@ -12,8 +12,12 @@ app.use(express.static("public"));
 
 // # Routers
 import { beersRouter } from "./routers/beersRouter.js";
+import { breweriesRouter } from "./routers/breweriesRouter.js";
+import { stylesRouter } from "./routers/stylesRouter.js";
 
 app.use("/api/beers", beersRouter);
+app.use("/api/breweries", breweriesRouter);
+app.use("/api/styles", stylesRouter);
 
 // # Listening
 app.listen(port, () => {

@@ -48,7 +48,46 @@ const beersController = {
     });
   },
 
-  //   store() {},
+  store(req, res) {
+    const { name, liked, image, alcohol_degrees, size, brewery_id, style_id } =
+      req.body;
+
+    // # Input Empty
+    if (
+      !name ||
+      !image ||
+      !alcohol_degrees ||
+      !size ||
+      !brewery_id ||
+      !style_id
+    )
+      return res
+        .status(400)
+        .json({ status: "KO", message: "Input Cannot be Empty" });
+
+    if (liked !== 0 || liked !== 1) {
+      return res.status(400).json({ status: "KO", message: "Fatal Error" });
+    }
+
+    const sqlStore =
+      "INSERT INTO `beers` (`name`, `liked`, `image`, `alcohol_degrees`, `size`, `brewery_id`, `style_id`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+    connection.query(
+      sqlStore,
+      [name, liked, image, alcohol_degrees, size, brewery_id, style_id],
+      (err) => {
+        if (err)
+          return res
+            .status(500)
+            .json({ status: "KO", message: err.sqlMessage });
+
+        return res
+          .status(201)
+          .json({ status: "OK", message: "Created Succesfully" });
+      }
+    );
+  },
+
   //   update() {},
   //   modify() {},
   //   destroy() {},
